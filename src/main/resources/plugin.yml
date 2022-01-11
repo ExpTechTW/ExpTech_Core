@@ -1,0 +1,18 @@
+name: ExpTech_Core
+version: 22w03-pre1
+author: whes1015
+main: main.whes1015
+loadbefore:
+  - ExpTech_FreeCamera
+  - ExpTech_DataRecord
+  - ExpTech_BanSystem
+
+commands:
+  et:
+    description: 控制 ExpTech 插件
+    usage: /et <args>
+    permission: exptech.admin
+permissions:
+  exptech.admin:
+    description: 使用控制類指令
+    default: op
