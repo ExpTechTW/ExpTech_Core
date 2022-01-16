@@ -27,7 +27,10 @@ public class whes1015 extends JavaPlugin implements Listener {
     public static JsonObject DATA = new JsonObject();
     public static String LogLevel;
     public static File folder;
-    public static Integer VersionCode=220301;
+    public static Integer VersionCode=220315;
+    //pre 01~10
+    //rc 11~14
+    //release 15
 
     @Override
     public void onEnable() {

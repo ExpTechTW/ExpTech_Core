@@ -1,5 +1,5 @@
 name: ExpTech_Core
-version: 22w03-pre1
+version: 22w03
 author: whes1015
 main: main.whes1015
 loadbefore:
