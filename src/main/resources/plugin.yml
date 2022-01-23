@@ -1,11 +1,13 @@
 name: ExpTech_Core
-version: 22w03
+version: 1.0
 author: whes1015
 main: main.whes1015
 loadbefore:
   - ExpTech_FreeCamera
   - ExpTech_DataRecord
   - ExpTech_BanSystem
+  - ExpTech_Economy
+  - ExpTech_Plugin
 
 commands:
   et:

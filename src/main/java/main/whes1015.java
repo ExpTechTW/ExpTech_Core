@@ -22,12 +22,12 @@ import java.util.Objects;
 public class whes1015 extends JavaPlugin implements Listener {
 
     Integer configVer=1;
-    List<String> BkkitVersion= Arrays.asList("1.18.1-R0.1-SNAPSHOT","1.18-R0.1-SNAPSHOT","1.17.1-R0.1-SNAPSHOT");
+    List<String> BkkitVersion= Arrays.asList("1.18.1-R0.1-SNAPSHOT","1.18-R0.1-SNAPSHOT","1.17.1-R0.1-SNAPSHOT","1.17-R0.1-SNAPSHOT");
 
     public static JsonObject DATA = new JsonObject();
     public static String LogLevel;
     public static File folder;
-    public static Integer VersionCode=220315;
+    public static Integer VersionCode=220415;
     //pre 01~10
     //rc 11~14
     //release 15
@@ -64,6 +64,8 @@ public class whes1015 extends JavaPlugin implements Listener {
             is = new URL(webPage).openStream();
         } catch (IOException e) {
             logger.log("ERROR","Core_Update",e.getMessage());
+            main();
+            return;
         }
         assert is != null;
         Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
@@ -104,17 +106,20 @@ public class whes1015 extends JavaPlugin implements Listener {
         data.addProperty("Config", configVer);
         data.addProperty("BukkitVersion", server.getBukkitVersion());
         JsonObject jsonObject= network.Post(data);
-        assert jsonObject != null;
-        if(Objects.equals(jsonObject.get("response").getAsString(), "Key verification failed")){
-            logger.log("WARN","main","APIkey verification failed");
-            Bukkit.getServer().shutdown();
-        }else if(Objects.equals(jsonObject.get("response").getAsString(), "UUID can not be null")) {
-            logger.log("WARN", "Core_main", "UUID can not be null");
+        if (jsonObject == null){
             Bukkit.getServer().shutdown();
         }else {
-            if(!BkkitVersion.contains(getServer().getBukkitVersion())) {
-                logger.log("WARN", "Core_main", "Server Version is not Supported,Please upgrade!");
+            if (Objects.equals(jsonObject.get("response").getAsString(), "Key verification failed")) {
+                logger.log("WARN", "main", "APIkey verification failed");
                 Bukkit.getServer().shutdown();
+            } else if (Objects.equals(jsonObject.get("response").getAsString(), "UUID can not be null")) {
+                logger.log("WARN", "Core_main", "UUID can not be null");
+                Bukkit.getServer().shutdown();
+            } else {
+                if (!BkkitVersion.contains(getServer().getBukkitVersion())) {
+                    logger.log("WARN", "Core_main", "Server Version is not Supported,Please upgrade!");
+                    Bukkit.getServer().shutdown();
+                }
             }
         }
     }

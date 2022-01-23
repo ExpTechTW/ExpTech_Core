@@ -16,7 +16,7 @@ publishing {
 }
 
 group 'org.exptech'
-version '22w03'
+version ''
 
 repositories {
     maven {

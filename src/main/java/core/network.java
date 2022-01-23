@@ -72,6 +72,10 @@ public class network {
         }
             JsonElement jsonElement = JsonParser.parseString(response.toString());
             logger.log("DEBUG", "Core_Post", response.toString());
-            return jsonElement.getAsJsonObject();
+            if(!response.isEmpty()) {
+                return jsonElement.getAsJsonObject();
+            }else {
+                return null;
+            }
     }
 }
