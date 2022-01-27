@@ -52,7 +52,7 @@ public class network {
         try {
             assert stream != null;
             stream.write(out);
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             logger.log("ERROR","Core_Post",e.getMessage());
         }
         String inputLine;

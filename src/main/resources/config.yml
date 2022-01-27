@@ -1,4 +1,4 @@
-ConfigVersion: 1
+ConfigVersion: 2
 #(cht) 請不要更改上述設置，否則插件可能會無法運行
 #(en) Please do not change the above settings, otherwise the plugin may not work
 ServerName: ExpTech Server
@@ -9,6 +9,9 @@ APIKey: =MQbXwsr=VvBX1K2dZNswvSF4dNDlz
 BetaVersion: false
 #(cht) Beta版本可能會出現錯誤或不穩定，適合喜歡嚐鮮的用戶升級體驗
 #(en) Beta version may cause errors or instability, suitable for users who like early adopters to upgrade the experience
+FocusCertified: false
+#(cht) 強制玩家必須完成認證
+#(en) Mandatory players must complete authentication
 LogLevel: INFO
 # INFO / DEBUG / TRACE
 

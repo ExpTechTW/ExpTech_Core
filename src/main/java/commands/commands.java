@@ -8,6 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 
+import static core.discord.Discord;
+
 public class commands implements CommandExecutor{
 
     private final JavaPlugin plugin;
@@ -27,6 +29,8 @@ public class commands implements CommandExecutor{
                 } else {
                     logger.log("WARN", "Core_onCommand", "Unknown Command");
                 }
+        }else if(Objects.equals(label, "dc")) {
+            Discord(sender.getName(),args[0]);
         }
         return true;
     }

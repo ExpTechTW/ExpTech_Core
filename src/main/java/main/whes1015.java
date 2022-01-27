@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import commands.commands;
 import core.logger;
 import core.network;
+import eventlistener.eventlistener;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.event.Listener;
@@ -21,13 +22,14 @@ import java.util.Objects;
 
 public class whes1015 extends JavaPlugin implements Listener {
 
-    Integer configVer=1;
+    Integer configVer=2;
     List<String> BkkitVersion= Arrays.asList("1.18.1-R0.1-SNAPSHOT","1.18-R0.1-SNAPSHOT","1.17.1-R0.1-SNAPSHOT","1.17-R0.1-SNAPSHOT");
 
     public static JsonObject DATA = new JsonObject();
     public static String LogLevel;
     public static File folder;
-    public static Integer VersionCode=220415;
+    public static Integer VersionCode=220615;
+    public static Integer state=0;
     //pre 01~10
     //rc 11~14
     //release 15
@@ -44,11 +46,14 @@ public class whes1015 extends JavaPlugin implements Listener {
         folder=getDataFolder();
         logger.log("INFO", "Core_onEnable", "Loading! Version: " + getDescription().getVersion());
         Objects.requireNonNull(getCommand("et")).setExecutor(new commands(this));
+        Objects.requireNonNull(getCommand("dc")).setExecutor(new commands(this));
+        getServer().getPluginManager().registerEvents(new eventlistener(), this);
         Update();
     }
 
     @Override
     public void onDisable(){
+        state=1;
         JsonElement Data= JsonParser.parseString(DATA.toString());
         JsonObject data=Data.getAsJsonObject();
         data.addProperty("Type","onDisable");
@@ -107,18 +112,19 @@ public class whes1015 extends JavaPlugin implements Listener {
         data.addProperty("BukkitVersion", server.getBukkitVersion());
         JsonObject jsonObject= network.Post(data);
         if (jsonObject == null){
-            Bukkit.getServer().shutdown();
+            logger.log("ERROR", "Core_main", "API return null");
+            Bukkit.getPluginManager().disablePlugins();
         }else {
             if (Objects.equals(jsonObject.get("response").getAsString(), "Key verification failed")) {
                 logger.log("WARN", "main", "APIkey verification failed");
-                Bukkit.getServer().shutdown();
+                Bukkit.getPluginManager().disablePlugins();
             } else if (Objects.equals(jsonObject.get("response").getAsString(), "UUID can not be null")) {
                 logger.log("WARN", "Core_main", "UUID can not be null");
-                Bukkit.getServer().shutdown();
+                Bukkit.getPluginManager().disablePlugins();
             } else {
                 if (!BkkitVersion.contains(getServer().getBukkitVersion())) {
                     logger.log("WARN", "Core_main", "Server Version is not Supported,Please upgrade!");
-                    Bukkit.getServer().shutdown();
+                    Bukkit.getPluginManager().disablePlugins();
                 }
             }
         }
