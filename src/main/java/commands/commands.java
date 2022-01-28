@@ -30,7 +30,7 @@ public class commands implements CommandExecutor{
                     logger.log("WARN", "Core_onCommand", "Unknown Command");
                 }
         }else if(Objects.equals(label, "dc")) {
-            Discord(sender.getName(),args[0]);
+            Discord(sender.getName(),args[0],plugin);
         }
         return true;
     }

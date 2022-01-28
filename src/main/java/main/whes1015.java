@@ -47,7 +47,7 @@ public class whes1015 extends JavaPlugin implements Listener {
         logger.log("INFO", "Core_onEnable", "Loading! Version: " + getDescription().getVersion());
         Objects.requireNonNull(getCommand("et")).setExecutor(new commands(this));
         Objects.requireNonNull(getCommand("dc")).setExecutor(new commands(this));
-        getServer().getPluginManager().registerEvents(new eventlistener(), this);
+        getServer().getPluginManager().registerEvents(new eventlistener(this), this);
         Update();
     }
 
