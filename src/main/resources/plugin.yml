@@ -1,7 +1,8 @@
 name: ExpTech_Core
-version: 1.3
+version: 1.4
 author: whes1015
 main: main.whes1015
+api-version: 1.18
 loadbefore:
   - ExpTech_FreeCamera
   - ExpTech_DataRecord
@@ -15,10 +16,6 @@ commands:
     description: 控制 ExpTech 插件
     usage: /et <args>
     permission: exptech.admin
-  dc:
-    description: Discord 驗證
-    usage: /dc <args>
-    permission: exptech.user
 permissions:
   exptech.admin:
     description: 使用控制類指令

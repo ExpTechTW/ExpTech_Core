@@ -81,7 +81,7 @@ public class whes1015 extends JavaPlugin implements Listener {
             saveDefaultConfig();
             if (getConfig().getInt("ConfigVersion") < configVer) {
                 logger.log("WARN", "Core_Update", "Please delete the old Config.yml file, the plugin will automatically generate a new Config.yml file!");
-                Bukkit.getServer().shutdown();
+                disable();
             } else {
                 if (!Objects.equals(jsonObject.get("tag_name").getAsString(), getDescription().getVersion())) {
                     if (getConfig().getBoolean("BetaVersion") && jsonObject.get("prerelease").getAsBoolean() || (!getConfig().getBoolean("BetaVersion")) && !jsonObject.get("prerelease").getAsBoolean()) {
@@ -96,6 +96,14 @@ public class whes1015 extends JavaPlugin implements Listener {
             }
         }
         main();
+    }
+
+    public void disable(){
+        if(getConfig().getBoolean("InterruptError")){
+            Bukkit.getPluginManager().disablePlugins();
+        }else {
+            logger.log("WARN", "disable", "Config has prevented the plugin from closing");
+        }
     }
 
     public void main() {
@@ -113,18 +121,18 @@ public class whes1015 extends JavaPlugin implements Listener {
         JsonObject jsonObject= network.Post(data);
         if (jsonObject == null){
             logger.log("ERROR", "Core_main", "API return null");
-            Bukkit.getPluginManager().disablePlugins();
+            disable();
         }else {
             if (Objects.equals(jsonObject.get("response").getAsString(), "Key verification failed")) {
                 logger.log("WARN", "main", "APIkey verification failed");
-                Bukkit.getPluginManager().disablePlugins();
+                disable();
             } else if (Objects.equals(jsonObject.get("response").getAsString(), "UUID can not be null")) {
                 logger.log("WARN", "Core_main", "UUID can not be null");
-                Bukkit.getPluginManager().disablePlugins();
+                disable();
             } else {
                 if (!BkkitVersion.contains(getServer().getBukkitVersion())) {
                     logger.log("WARN", "Core_main", "Server Version is not Supported,Please upgrade!");
-                    Bukkit.getPluginManager().disablePlugins();
+                    disable();
                 }
             }
         }

@@ -9,6 +9,9 @@ APIKey: =MQbXwsr=VvBX1K2dZNswvSF4dNDlz
 BetaVersion: false
 #(cht) Beta版本可能會出現錯誤或不穩定，適合喜歡嚐鮮的用戶升級體驗
 #(en) Beta version may cause errors or instability, suitable for users who like early adopters to upgrade the experience
+InterruptError: true
+#(cht) 插件會在發生錯誤時試圖阻自身繼續執行
+#(en) The plugin will try to stop itself from continuing when an error occurs
 FocusCertified: false
 #(cht) 強制玩家必須完成認證
 #(en) Mandatory players must complete authentication
