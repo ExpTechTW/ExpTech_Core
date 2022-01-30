@@ -102,7 +102,7 @@ public class whes1015 extends JavaPlugin implements Listener {
         if(getConfig().getBoolean("InterruptError")){
             Bukkit.getPluginManager().disablePlugins();
         }else {
-            logger.log("WARN", "disable", "Config has prevented the plugin from closing");
+            logger.log("WARN", "disable", "Config has prevented the plugin from closing!");
         }
     }
 

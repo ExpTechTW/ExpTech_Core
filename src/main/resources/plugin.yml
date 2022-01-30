@@ -1,5 +1,5 @@
 name: ExpTech_Core
-version: 1.4
+version: 1.5
 author: whes1015
 main: main.whes1015
 api-version: 1.18
@@ -16,6 +16,9 @@ commands:
     description: 控制 ExpTech 插件
     usage: /et <args>
     permission: exptech.admin
+  dc:
+    description: 綁定 dc 帳號
+    usage: /dc <args>
 permissions:
   exptech.admin:
     description: 使用控制類指令
