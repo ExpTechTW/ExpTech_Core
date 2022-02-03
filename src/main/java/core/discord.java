@@ -28,6 +28,7 @@ public class discord {
                 if(plugin.getConfig().getBoolean("FocusCertified")) {
                     discord.remove(player);
                     Objects.requireNonNull(Bukkit.getPlayer(player)).setGameMode(Bukkit.getServer().getDefaultGameMode());
+                    Objects.requireNonNull(Bukkit.getPlayer(player)).setNoDamageTicks(0);
                 }
                 Objects.requireNonNull(Bukkit.getPlayer(player)).sendMessage("\u6210\u529f\u7d81\u5b9a\u5e33\u865f!");
             }else {
